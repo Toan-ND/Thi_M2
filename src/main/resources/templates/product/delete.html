@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout :: head"></head>
+<body>
+<h3>Remove product</h3>
+<p>
+    <a th:href="@{/products}">
+        Back to products list
+    </a>
+</p>
+<th:block th:if="${message}">
+    <p th:text="${message}"></p>
+</th:block>
+<div id="form">
+    <form action="#" th:action="@{/delete-product}" th:object="${product}"
+          method="POST" novalidate="novalidate">
+        <input type="hidden" th:field="*{id}"/>
+        <div>
+            <label>Name: </label>
+            <input type="text" th:field="*{name}"/>
+        </div>
+        <div>
+            <label>Price </label>
+            <input type="number" th:field="*{price}"/>
+        </div>
+        <div>
+            <label>Quantity </label>
+            <input type="number" th:field="*{birthDate}"/>
+        </div>
+        <div>
+            <label>Discreption </label>
+            <input type="text" th:field="*{discreption}"/>
+        </div>
+        <div>
+            <label>Categories </label>
+            <select name="department">
+                <option th:each="d : ${categories}"
+                        th:value="${d.id}"
+                        th:text="${d.name}"
+                        th:selected="(${d.id} == *{category.id})"></option>
+            </select>
+        </div>
+        <input type="submit" value="Delete"></input>
+    </form>
+</div>
+<footer th:replace="layout :: footer"></footer>
+</body>
+</html>
